@@ -1,7 +1,7 @@
 import os
 import io
 import base64
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template_string
 from flask_restx import Api, Resource, fields
 from werkzeug.datastructures import FileStorage
 import google.generativeai as genai
@@ -136,6 +136,11 @@ class Health(Resource):
     def get(self):
         """Verifica el estado del servicio"""
         return {'status': 'healthy'}
+
+@app.route('/')
+def home():
+    """Página de inicio"""
+    return render_template_string('<h1>Herramientas para POC AERATION</h1>')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
