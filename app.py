@@ -13,6 +13,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    """Página de inicio"""
+    return render_template_string('<h1>Herramientas para POC AERATION</h1>')
+
 api = Api(
     app,
     version='1.0',
@@ -136,11 +142,6 @@ class Health(Resource):
     def get(self):
         """Verifica el estado del servicio"""
         return {'status': 'healthy'}
-
-@app.route('/')
-def home():
-    """Página de inicio"""
-    return render_template_string('<h1>Herramientas para POC AERATION</h1>')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
